@@ -29,9 +29,9 @@ you ──▶ SUPERVISOR agent ──▶ 🐕 pets analyst · 🚨 city services
 
 ## Step 2 — Follow the notebooks in order
 
-| # | File | What you'll do | Time |
+| Step | File | What you'll do | Time |
 |---|---|---|---|
-| 1 | `notebooks/01_setup_data` | Load Calgary open data into Delta tables | ~10 min |
+| 1 | `notebooks/01_setup_data` | Load Calgary open data into Delta tables (governed database tables in your workspace) | ~10 min |
 | 2 | `GENIE_SETUP.md` | Create a Genie space — text-to-SQL with zero code | ~10 min |
 | 3 | `notebooks/02_simple_agent` | Build an agent from scratch: LLM + tools + loop | ~20 min |
 | 4 | `notebooks/03_multi_agent` | Specialists + a supervisor = agentic workflow | ~15 min |

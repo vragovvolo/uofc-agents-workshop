@@ -12,6 +12,8 @@
 # MAGIC
 # MAGIC You don't always need an agent. Databricks SQL has **AI functions** that call an LLM
 # MAGIC per row. One line of SQL = LLM over your whole table.
+# MAGIC
+# MAGIC *(If `databricks-gpt-oss-20b` isn't in your workspace, swap in the model name notebook 02 printed.)*
 
 # COMMAND ----------
 
@@ -31,11 +33,13 @@
 
 # MAGIC %sql
 # MAGIC -- Classify traffic incidents by severity — no training, no labels, just ai_classify
+# MAGIC -- (limit BEFORE classifying: ai_* functions run per row, so always shrink the input first!)
 # MAGIC SELECT description,
 # MAGIC        ai_classify(description, ARRAY('minor', 'major', 'hazard')) AS severity
-# MAGIC FROM workspace.calgary.traffic
-# MAGIC ORDER BY start_dt DESC
-# MAGIC LIMIT 10
+# MAGIC FROM (
+# MAGIC   SELECT description FROM workspace.calgary.traffic
+# MAGIC   ORDER BY start_dt DESC LIMIT 10
+# MAGIC )
 
 # COMMAND ----------
 

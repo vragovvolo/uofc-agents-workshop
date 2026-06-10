@@ -12,7 +12,7 @@
 # MAGIC | `pets` | Licensed cats & dogs by community, monthly since 2018 | ~43K |
 # MAGIC | `crime` | Crime counts by community & category, 2018–2024 | ~77K |
 # MAGIC | `traffic` | Traffic incidents (near-live feed) | ~62K |
-# MAGIC | `population` | Civic census population by community, 1958–2019 | ~10K |
+# MAGIC | `population` | Civic census population by community, 1968–2019 | ~10K |
 # MAGIC | `communities` | Community → sector / ward lookup | ~312 |
 # MAGIC
 # MAGIC Most tables join on `comm_code` or the uppercase community name.
@@ -49,8 +49,8 @@ TABLE_COMMENTS = {
     "pets": "Licensed pets (CATS/DOGS) per community per month since 2018. license_volume = number of active licenses.",
     "crime": "Monthly crime counts by community name and category, Jan 2018 - Sep 2024 (historical).",
     "traffic": "Traffic incidents with location text, timestamp, quadrant (NW/NE/SW/SE) and lat/long. No community column.",
-    "population": "Civic census population and dwellings by community, 1958-2019. Use census_year=2019 for per-capita math.",
-    "c311": "311 service requests since June 2025: service_name, agency, status, community (comm_code/comm_name), lat/long.",
+    "population": "Civic census population and dwellings by community, 1968-2019. Use census_year=2019 for per-capita math.",
+    "c311": "311 service requests since June 2025: service_name, agency_responsible, status_description, comm_code, comm_name (UPPERCASE), longitude/latitude.",
 }
 
 for name, comment in TABLE_COMMENTS.items():
@@ -72,8 +72,8 @@ print("\nAll tables created!")
 
 # MAGIC %sql
 # MAGIC SELECT community_name, animal, license_volume
-# MAGIC FROM pets
-# MAGIC WHERE date = (SELECT MAX(date) FROM pets) AND community_name IS NOT NULL
+# MAGIC FROM workspace.calgary.pets
+# MAGIC WHERE date = (SELECT MAX(date) FROM workspace.calgary.pets) AND community_name IS NOT NULL
 # MAGIC ORDER BY license_volume DESC
 # MAGIC LIMIT 10
 
@@ -86,7 +86,7 @@ print("\nAll tables created!")
 
 # MAGIC %sql
 # MAGIC SELECT service_name, COUNT(*) AS requests
-# MAGIC FROM c311
+# MAGIC FROM workspace.calgary.c311
 # MAGIC GROUP BY service_name
 # MAGIC ORDER BY requests DESC
 # MAGIC LIMIT 10
