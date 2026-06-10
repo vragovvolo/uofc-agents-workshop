@@ -61,7 +61,3 @@ Data licensed under the [Open Government Licence – City of Calgary](https://da
   Serving in the left sidebar to see your available endpoints.
 - **Compute quota message** → Free Edition has a daily fair-use limit. Pair up with a neighbour.
 - **Genie answers look off** → add the Instructions from `GENIE_SETUP.md`.
-
-## Presenter
-
-Volo Vragov — Specialist Solutions Architect, ML & GenAI, Databricks
