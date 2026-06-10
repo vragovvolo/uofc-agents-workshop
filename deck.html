@@ -49,7 +49,17 @@
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .callout { background: #FFF1EE; border: 1px solid #FF5F46; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
   .callout-good { background: #E6F6F0; border: 1px solid #00A972; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
-  .ascii-arch { font-family: "SF Mono", Monaco, monospace; font-size: 0.7em; background: var(--db-gray); padding: 12px 18px; border-radius: 6px; white-space: pre; line-height: 1.45; }
+  .arch { margin: 0.5em 0; font-size: 0.55em; text-align: center; }
+  .arch-top { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 6px; }
+  .arch-you { font-weight: 700; color: var(--db-navy); }
+  .arch-flow { color: var(--db-lava); font-size: 1.4em; }
+  .arch-sup { background: var(--db-navy); color: #fff; font-weight: 700; padding: 10px 26px; border-radius: 8px; letter-spacing: 0.03em; }
+  .arch-q { max-width: 250px; text-align: left; font-style: italic; color: #555; font-size: 0.85em; line-height: 1.3; }
+  .arch-fan { color: var(--db-lava); margin: 2px 0 6px; }
+  .arch-children { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 0 30px; }
+  .arch-card { background: var(--db-oat-med); border: 1px solid #DCDCDC; border-radius: 8px; padding: 10px 8px; line-height: 1.35; }
+  .arch-card b { color: var(--db-navy); }
+  .arch-base { margin: 10px 30px 0; background: #fff; border: 1px dashed var(--db-navy-600); border-radius: 8px; padding: 8px; color: var(--db-navy-600); }
   .reveal section.title-slide h1 { font-size: 2.1em; margin-bottom: 0.2em; color: #fff; }
   .reveal section.title-slide h3 { color: var(--db-oat-light); font-weight: 400; }
   .reveal section.title-slide .sub { font-size: 0.7em; color: #C9CFD2; margin-top: 1em; }
@@ -75,7 +85,7 @@
   <h3>From zero to a multi-agent system over real Calgary data — in 90 minutes</h3>
   <div class="sub">
     <strong>UofC AI Summer School</strong><br/>
-    Volo Vragov &mdash; Specialist Solutions Architect, ML &amp; GenAI, Databricks<br/>
+    Volo Vragov &amp; the Databricks Team<br/>
     June 10, 2026
   </div>
 </section>
@@ -101,17 +111,21 @@
 <!-- 3. What we're building -->
 <section>
   <h1>What you'll build today</h1>
-  <div class="ascii-arch">                        ┌─────────────────────┐
-        you  ──────────▶│   SUPERVISOR agent  │   "Which community has the most
-                        └───┬───────┬───────┬─┘    dogs — and is it also the
-            ┌───────────────┘       │       └────────────┐        complaint capital?"
-            ▼                       ▼                    ▼
-   🐕 pets &amp; people        🚨 city services        🧞 Genie space
-   licensed cats/dogs,     311 complaints,         text-to-SQL agent
-   census population       crime, traffic          you build with clicks
-            └───────────────────────┴─────────────────────┘
-                                    ▼
-                 Delta tables · real data from data.calgary.ca</div>
+  <div class="arch">
+    <div class="arch-top">
+      <span class="arch-you">you</span>
+      <span class="arch-flow">&#10230;</span>
+      <span class="arch-sup">SUPERVISOR agent</span>
+      <span class="arch-q">&ldquo;Which community has the most dogs &mdash; and is it also the complaint capital?&rdquo;</span>
+    </div>
+    <div class="arch-fan">&#9660;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9660;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9660;</div>
+    <div class="arch-children">
+      <div class="arch-card"><b>&#128021; pets &amp; people</b><br/>licensed cats/dogs,<br/>census population</div>
+      <div class="arch-card"><b>&#128680; city services</b><br/>311 complaints,<br/>crime, traffic</div>
+      <div class="arch-card"><b>&#129498; Genie space</b><br/>text-to-SQL agent<br/>you build with clicks</div>
+    </div>
+    <div class="arch-base">Delta tables &middot; real data from data.calgary.ca</div>
+  </div>
   <ul class="small">
     <li>Every layer built by <strong>you</strong>, from scratch — no frameworks, ~60 lines of Python</li>
     <li>On the way: SQL, a no-code agent (Genie), LLM tool-calling, and agent observability</li>
@@ -167,7 +181,7 @@
 </section>
 
 <!-- 7. Segment: data -->
-<section>
+<section class="compact">
   <h1>① Connecting to your data</h1>
   <ul>
     <li>Open <code>notebooks/01_setup_data</code> → <strong>Run all</strong> <span class="small">(serverless compute attaches automatically)</span></li>
@@ -272,8 +286,7 @@
     <li><strong>Your workspace is yours to keep</strong> — free, with everything you built today</li>
   </ul>
   <blockquote>
-    Repo stays up: <strong>github.com/vragovvolo/uofc-agents-workshop</strong><br/>
-    <span class="small">Questions later: volo.vragov@databricks.com</span>
+    Repo stays up: <strong>github.com/vragovvolo/uofc-agents-workshop</strong>
   </blockquote>
   <h3>Thank you — go build agents 🛠️</h3>
 </section>
