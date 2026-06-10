@@ -37,10 +37,8 @@ TOKEN = w.config.authenticate()["Authorization"].replace("Bearer ", "")
 
 available = {e.name for e in w.serving_endpoints.list()}
 PREFERRED = [
-    "databricks-claude-sonnet-4-5",
-    "databricks-claude-sonnet-4",
-    "databricks-claude-3-7-sonnet",
     "databricks-gpt-oss-120b",
+    "databricks-llama-4-maverick",
     "databricks-meta-llama-3-3-70b-instruct",
     "databricks-gpt-oss-20b",
 ]
