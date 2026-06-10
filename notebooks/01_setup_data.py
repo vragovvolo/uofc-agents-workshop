@@ -97,7 +97,8 @@ print("\nAll tables created!")
 # MAGIC ## Try it yourself (2 min)
 # MAGIC
 # MAGIC 1. Open the **Catalog** icon in the left sidebar → `workspace` → `calgary` → click a table to see its schema and sample data.
-# MAGIC 2. Add a cell below and ask the **Assistant** (the ✦ icon, or right-click → "Generate with Assistant") something like:
+# MAGIC 2. Add a cell below and ask **Genie Code** (the AI assistant built into the notebook) something like:
 # MAGIC    *"write a SQL query showing crime count by year for the BELTLINE community"* — this is vibe-coding, Databricks style.
+# MAGIC    (Genie Code helps you *write code*; the Genie *spaces* you'll meet next let you chat with your *data* — related, but different tools.)
 # MAGIC
 # MAGIC **Next up:** `GENIE_SETUP.md` in this repo — create a Genie space and talk to these tables in plain English. Then notebook `02_simple_agent`.

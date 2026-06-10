@@ -64,7 +64,7 @@
 # MAGIC | Level | Challenge |
 # MAGIC |---|---|
 # MAGIC | 🟢 | Make a specialist that answers ONLY about your own neighbourhood. |
-# MAGIC | 🟢 | Ask the Assistant to build a chart of pets vs population by sector. |
+# MAGIC | 🟢 | Ask Genie Code to build a chart of pets vs population by sector. |
 # MAGIC | 🟡 | Add a `traffic_analyst` specialist to the supervisor (the notebook 03 exercise). |
 # MAGIC | 🟡 | Make the supervisor produce a "City Pulse Report": one paragraph per domain. |
 # MAGIC | 🔴 | Use `ai_query` *inside* a tool, so your agent can do per-row LLM analysis. |
