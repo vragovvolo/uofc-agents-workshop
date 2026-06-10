@@ -10,9 +10,23 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
 <style>
-  :root { --db-orange: #FF3621; --db-navy: #1B3139; --db-gray: #f4f4f4; }
-  .reveal { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  :root {
+    --db-lava: #FF3621;        /* Lava 600 — primary accent */
+    --db-lava-500: #FF5F46;
+    --db-navy: #1B3139;        /* Navy 800 — primary text */
+    --db-navy-600: #2D4550;
+    --db-oat-light: #F9F7F4;   /* Oat Light — slide background */
+    --db-oat-med: #EEEDE9;     /* Oat Medium — panels */
+    --db-green: #00A972;       /* Green 600 */
+    --db-gray: var(--db-oat-med);
+    --db-orange: var(--db-lava);
+  }
+  .reveal-viewport { background: var(--db-oat-light); }
+  .reveal { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--db-navy); }
+  .db-footer-logo { height: 22px; vertical-align: middle; opacity: 0.85; }
   .reveal h1, .reveal h2, .reveal h3 { color: var(--db-navy); text-transform: none; letter-spacing: -0.02em; font-weight: 600; }
   .reveal h1 { font-size: 1.8em; }
   .reveal h2 { font-size: 1.4em; }
@@ -21,27 +35,32 @@
   .reveal section.title-slide { text-align: center; }
   .reveal table { font-size: 0.55em; margin: 0.4em 0; border-collapse: collapse; width: 100%; }
   .reveal table th { background: var(--db-navy); color: white; padding: 6px 10px; text-align: left; font-weight: 600; }
-  .reveal table td { padding: 5px 10px; border-bottom: 1px solid #e5e5e5; vertical-align: top; }
+  .reveal table td { padding: 5px 10px; border-bottom: 1px solid #DCDCDC; background: #fff; vertical-align: top; }
   .reveal table tr:nth-child(even) td { background: var(--db-gray); }
   .reveal ul, .reveal ol { margin-left: 1em; }
   .reveal li { margin: 0.25em 0; }
-  .reveal blockquote { border-left: 4px solid var(--db-orange); background: var(--db-gray); padding: 12px 18px; font-style: normal; box-shadow: none; margin: 0.6em 0; }
+  .reveal blockquote { border-left: 4px solid var(--db-lava); background: var(--db-oat-med); padding: 12px 18px; font-style: normal; box-shadow: none; margin: 0.6em 0; }
   .reveal pre { font-size: 0.55em; box-shadow: none; border-left: 4px solid var(--db-navy); }
   .reveal code { font-family: "SF Mono", Monaco, Consolas, monospace; }
-  .reveal .footer { position: absolute; bottom: 14px; left: 30px; right: 30px; font-size: 0.4em; color: #888; display: flex; justify-content: space-between; }
+  #db-footer { position: fixed; bottom: 12px; left: 28px; right: 100px; z-index: 30; display: flex; justify-content: space-between; align-items: center; font-family: "DM Sans", sans-serif; font-size: 13px; color: #6B7A80; pointer-events: none; transition: opacity 0.3s; }
+  #db-footer.hidden { opacity: 0; }
   .reveal strong { color: var(--db-navy); }
   .reveal em { color: #555; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .callout { background: #fff7ed; border: 1px solid #fdba74; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
-  .callout-good { background: #f0fdf4; border: 1px solid #86efac; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
+  .callout { background: #FFF1EE; border: 1px solid #FF5F46; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
+  .callout-good { background: #E6F6F0; border: 1px solid #00A972; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
   .ascii-arch { font-family: "SF Mono", Monaco, monospace; font-size: 0.7em; background: var(--db-gray); padding: 12px 18px; border-radius: 6px; white-space: pre; line-height: 1.45; }
-  .reveal section.title-slide h1 { font-size: 2.1em; margin-bottom: 0.2em; }
-  .reveal section.title-slide h3 { color: var(--db-navy); font-weight: 400; }
-  .reveal section.title-slide .sub { font-size: 0.7em; color: #666; margin-top: 1em; }
+  .reveal section.title-slide h1 { font-size: 2.1em; margin-bottom: 0.2em; color: #fff; }
+  .reveal section.title-slide h3 { color: var(--db-oat-light); font-weight: 400; }
+  .reveal section.title-slide .sub { font-size: 0.7em; color: #C9CFD2; margin-top: 1em; }
+  .reveal section.title-slide .sub strong { color: #fff; }
+  .reveal section.title-slide .db-title-logo { height: 84px; margin-bottom: 1.2em; }
   .small { font-size: 0.75em; color: #555; }
-  .bigurl { font-family: "SF Mono", Monaco, monospace; font-size: 1.0em; background: var(--db-navy); color: #fff; padding: 10px 22px; border-radius: 8px; display: inline-block; margin: 0.4em 0; }
-  .step { background: var(--db-gray); border-radius: 6px; padding: 10px 16px; margin: 0.35em 0; font-size: 0.8em; }
-  .step b { color: var(--db-orange); margin-right: 8px; }
+  .reveal section.compact { font-size: 0.72em; }
+  .reveal section.compact h1 { font-size: 2.2em; }
+  .bigurl { font-family: "SF Mono", Monaco, monospace; font-size: 0.62em; background: var(--db-lava); color: #fff; padding: 10px 22px; border-radius: 8px; display: inline-block; margin: 0.4em 0; }
+  .step { background: var(--db-oat-med); border-radius: 6px; padding: 8px 14px; margin: 0.3em 0; font-size: 0.62em; }
+  .step b { color: var(--db-lava); margin-right: 8px; }
 </style>
 </head>
 <body>
@@ -50,7 +69,8 @@
 <div class="slides">
 
 <!-- 1. Title -->
-<section class="title-slide">
+<section class="title-slide" data-background-color="#1B3139">
+  <img class="db-title-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSI1NCIgdmlld0JveD0iMCAwIDk2IDU0IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMjYuNTI3NiA0OS45MzczVjQ1LjA3NUMyNi41Mjc2IDQ0Ljk0ODEgMjYuNDQzNSA0NC44NjM2IDI2LjMxNzUgNDQuODYzNkgyNC43MjA0VjQyLjk2MDlIMjYuMzE3NUMyNi40NDM1IDQyLjk2MDkgMjYuNTI3NiA0Mi44NzYzIDI2LjUyNzYgNDIuNzQ5NVYzOS43MDUzSDI4Ljc5N1Y0Mi43NDk1QzI4Ljc5NyA0Mi44NzYzIDI4Ljg4MTEgNDIuOTYwOSAyOS4wMDcyIDQyLjk2MDlIMzEuMjM0NlY0NC44NjM2SDI5LjAwNzJDMjguODgxMSA0NC44NjM2IDI4Ljc5NyA0NC45NDgxIDI4Ljc5NyA0NS4wNzVWNDkuMzg3N0MyOC43OTcgNTEuNDE3MiAyOS41MTE1IDUxLjU4NjMgMzAuNDM2MSA1MS41ODYzQzMwLjc3MjMgNTEuNTg2MyAzMS4yNzY2IDUxLjU0NCAzMS41NzA4IDUxLjUwMTdWNTMuNDg4OUMzMS4xOTI2IDUzLjUzMTIgMzAuNTYyMiA1My42MTU4IDI5Ljg0NzcgNTMuNjE1OEMyOC45NjUxIDUzLjU3MzUgMjYuNTI3NiA1My41NzM1IDI2LjUyNzYgNDkuOTM3M1pNODguMjIzMSA1MS4xMjEyTDkwLjA3MjMgNTAuMTQ4N0M5MC40OTI1IDUxLjEyMTIgOTEuMjkxIDUxLjc1NTQgOTIuMjE1NiA1MS43NTU0QzkyLjkzMDEgNTEuNzU1NCA5My43Mjg2IDUxLjQ1OTQgOTMuNzI4NiA1MC41NzE1QzkzLjcyODYgNDkuOTc5NiA5My4zNTA0IDQ5LjY0MTMgOTIuNDY3OCA0OS4zNDU0TDkxLjIwNyA0OC45MjI2Qzg5LjQ0MTkgNDguMzcyOSA4OC41NTkzIDQ3LjM1ODIgODguNTU5MyA0NS45MjA2Qzg4LjU1OTMgNDQuMTAyNSA5MC4wNzIzIDQyLjc0OTUgOTIuMTMxNiA0Mi43NDk1QzkzLjc3MDYgNDIuNzQ5NSA5NS4xNTc1IDQzLjYzNzQgOTUuODI5OSA0NS4wMzI3TDkzLjk4MDggNDYuMDQ3NEM5My41NjA1IDQ1LjE1OTUgOTIuODg4MSA0NC42NTIyIDkyLjA4OTYgNDQuNjUyMkM5MS4yOTEgNDQuNjUyMiA5MC43NDQ3IDQ1LjA3NSA5MC43NDQ3IDQ1LjcwOTJDOTAuNzQ0NyA0Ni4yNTg4IDkxLjE2NSA0Ni42ODE3IDkyLjAwNTUgNDYuOTM1M0w5My4yNjYzIDQ3LjM1ODJDOTUuMTE1NSA0Ny45NTAxIDk1Ljk5OCA0OC45NjQ4IDk1Ljk5OCA1MC4zNjAxQzk1Ljk5OCA1Mi41NTg4IDk0LjEwNjggNTMuNzAwNCA5Mi4yMTU2IDUzLjcwMDRDOTAuMzI0NCA1My42NTgxIDg4LjgxMTQgNTIuNjg1NiA4OC4yMjMxIDUxLjEyMTJaTTgxLjI0NjYgNDkuMjE4NUM4MS4yMDQ2IDQ5LjI2MDggODEuMTYyNiA0OS4zMDMxIDgxLjE2MjYgNDkuMzQ1NFY1My40MDQ0SDc4Ljg1MTFWMzguMzk0NUg4MS4xNjI2VjQ2LjU5NzFDODEuMTYyNiA0Ni42ODE3IDgxLjIwNDYgNDYuNzY2MiA4MS4yODg2IDQ2Ljc2NjJDODEuMzcyNyA0Ni44MDg1IDgxLjQ1NjcgNDYuNzY2MiA4MS40OTg4IDQ2LjcyMzlMODUuMjM5MiA0Mi45MTg2SDg4LjA1NUw4My42ODQyIDQ3LjM1ODJDODMuNjAwMSA0Ny40NDI3IDgzLjYwMDEgNDcuNTI3MyA4My42ODQyIDQ3LjYxMThMODguNDMzMiA1My40MDQ0SDg1LjYxNzRMODEuOTYxMSA0OC44MzhDODEuOTE5IDQ4Ljc5NTcgODEuODc3IDQ4Ljc1MzQgODEuODM1IDQ4Ljc1MzRDODEuNzkzIDQ4Ljc1MzQgODEuNzUwOSA0OC43NTM0IDgxLjcwODkgNDguNzk1N0w4MS4yNDY2IDQ5LjIxODVaTTc3LjcxNjMgNDQuMzU2Mkw3Ni4yNDU0IDQ1Ljc1MTVDNzUuNDA0OSA0NS4xMTczIDc0LjU2NDMgNDQuODIxMyA3My42Mzk3IDQ0LjgyMTNDNzEuNzA2NSA0NC44MjEzIDcwLjI3NzYgNDYuMjU4OCA3MC4yNzc2IDQ4LjIwMzhDNzAuMjc3NiA1MC4xNDg3IDcxLjcwNjUgNTEuNTg2MyA3My42Mzk3IDUxLjU4NjNDNzQuNDgwMyA1MS41ODYzIDc1LjM2MjggNTEuMjkwMyA3Ni4yODc0IDUwLjY1NjFMNzcuNTkwMyA1Mi4wNTE0Qzc1LjY5OTEgNTMuNDQ2NyA3NC42OTA0IDUzLjcwMDQgNzMuMzg3NiA1My43MDA0QzcxLjgzMjYgNTMuNzAwNCA3MC40NDU3IDUzLjE1MDcgNjkuNDM3IDUyLjEzNTlDNjguNDcwNCA1MS4xNjM1IDY3LjkyNDEgNDkuNzI1OSA2Ny45MjQxIDQ4LjIwMzhDNjcuOTI0MSA0NS4wMzI3IDcwLjIzNTYgNDIuNzA3MiA3My40Mjk2IDQyLjcwNzJDNzQuNDgwMyA0Mi43MDcyIDc2LjAzNTMgNDIuODc2MyA3Ny43MTYzIDQ0LjM1NjJaTTY2Ljg3MzQgMzkuODMyMUM2Ni44NzM0IDQwLjU5MzIgNjYuMjQzIDQxLjIyNzQgNjUuNDg2NSA0MS4yMjc0QzY0LjczIDQxLjIyNzQgNjQuMDk5NiA0MC41OTMyIDY0LjA5OTYgMzkuODMyMUM2NC4wOTk2IDM5LjA3MSA2NC43MyAzOC40MzY4IDY1LjQ4NjUgMzguNDM2OEM2Ni4yNDMgMzguNDM2OCA2Ni44NzM0IDM5LjA3MSA2Ni44NzM0IDM5LjgzMjFaTTY2LjY2MzMgNTMuNDA0NEg2NC4zNTE4VjQyLjk2MDlINjYuNjYzM1Y1My40MDQ0Wk01OS4zMDg2IDQ4LjgzOFY1My40NDY3SDU2Ljk5NzFWNDMuMDAzMkg1OS4yNjY1VjQ0LjI3MTZDNTkuMjY2NSA0NC4zNTYyIDU5LjMwODYgNDQuNDQwOCA1OS4zOTI2IDQ0LjQ4M0M1OS40NzY3IDQ0LjUyNTMgNTkuNTYwNyA0NC40ODMgNTkuNjAyOCA0NC4zOTg1QzYwLjE5MTEgNDMuNDI2IDYxLjI4MzggNDIuNzkxOCA2Mi40NjA2IDQyLjc5MThDNjIuNjI4NyA0Mi43OTE4IDYyLjc1NDggNDIuNzkxOCA2Mi44Mzg4IDQyLjgzNDFWNDUuMjAxOEM2Mi43MTI3IDQ1LjE1OTUgNjIuNTAyNiA0NS4xNTk1IDYyLjI5MjUgNDUuMTU5NUM2MC40NDMzIDQ1LjExNzMgNTkuMzA4NiA0Ni41NTQ4IDU5LjMwODYgNDguODM4Wk00Ni45MTA2IDQ4LjIwMzhDNDYuOTEwNiA0Ni4zMDExIDQ4LjMzOTYgNDQuODIxMyA1MC4xODg3IDQ0LjgyMTNDNTIuMDM3OSA0NC44MjEzIDUzLjQ2NjggNDYuMzAxMSA1My40NjY4IDQ4LjIwMzhDNTMuNDY2OCA1MC4xMDY0IDUyLjAzNzkgNTEuNTg2MyA1MC4xODg3IDUxLjU4NjNDNDguMzM5NiA1MS41ODYzIDQ2LjkxMDYgNTAuMTA2NCA0Ni45MTA2IDQ4LjIwMzhaTTQ3LjEyMDggNTIuMTc4MkM0Ny4xNjI4IDUyLjE3ODIgNDcuMTYyOCA1Mi4xNzgyIDQ3LjIwNDggNTIuMTc4MkM0Ny4yNDY4IDUyLjE3ODIgNDcuMzMwOSA1Mi4yMjA1IDQ3LjM3MjkgNTIuMjYyOEM0OC4xNzE0IDUzLjE5MyA0OS4zNDgyIDUzLjcwMDQgNTAuNjkzMSA1My43MDA0QzUzLjU1MDkgNTMuNzAwNCA1NS43MzYzIDUxLjI5MDMgNTUuNzM2MyA0OC4yMDM4QzU1LjczNjMgNDYuNjgxNyA1NS4yMzIgNDUuMzI4NyA1NC4yNjUzIDQ0LjI3MTZDNTMuMzQwOCA0My4yNTY5IDUyLjAzNzkgNDIuNzA3MiA1MC42NTEgNDIuNzA3MkM0OS4zNDgyIDQyLjcwNzIgNDguMTI5NCA0My4yNTY5IDQ3LjMzMDkgNDQuMjI5M0M0Ny4yODg5IDQ0LjI3MTYgNDcuMjA0OCA0NC4zMTM5IDQ3LjEyMDggNDQuMjcxNkM0Ny4wMzY3IDQ0LjIyOTMgNDYuOTk0NyA0NC4xODcxIDQ2Ljk5NDcgNDQuMTAyNVYzOC40MzY4SDQ0LjY4MzJWNTMuNDQ2N0g0Ni45OTQ3VjUyLjM4OTZDNDYuOTk0NyA1Mi4yNjI4IDQ3LjAzNjcgNTIuMjIwNSA0Ny4xMjA4IDUyLjE3ODJaTTM3LjUzODYgNTEuNTg2M0MzNS43MzE1IDUxLjU4NjMgMzQuMjYwNSA1MC4xMDY0IDM0LjI2MDUgNDguMjAzOEMzNC4yNjA1IDQ2LjMwMTEgMzUuNjg5NSA0NC44MjEzIDM3LjUzODYgNDQuODIxM0MzOS4zODc4IDQ0LjgyMTMgNDAuODE2NyA0Ni4zMDExIDQwLjgxNjcgNDguMjAzOEM0MC44MTY3IDUwLjEwNjQgMzkuMzQ1OCA1MS41ODYzIDM3LjUzODYgNTEuNTg2M1pNNDIuOTYwMSA1My40MDQ0VjQyLjk2MDlINDAuNjkwN1Y0NC4wMTc5QzQwLjY5MDcgNDQuMTAyNSA0MC42NDg2IDQ0LjE4NzEgNDAuNTY0NiA0NC4xODcxQzQwLjQ4MDUgNDQuMjI5MyA0MC4zOTY1IDQ0LjE4NzEgNDAuMzU0NCA0NC4xNDQ4QzM5LjU5OCA0My4yMTQ2IDM4LjQyMTIgNDIuNzA3MiAzNy4wMzQzIDQyLjcwNzJDMzQuMTc2NSA0Mi43MDcyIDMxLjk5MTEgNDUuMTE3MyAzMS45OTExIDQ4LjIwMzhDMzEuOTkxMSA1MS4yOTAzIDM0LjIxODUgNTMuNzAwNCAzNy4wMzQzIDUzLjcwMDRDMzguMzM3MSA1My43MDA0IDM5LjU1NTkgNTMuMTUwNyA0MC4zNTQ0IDUyLjE3ODJDNDAuMzk2NSA1Mi4wOTM3IDQwLjQ4MDUgNTIuMDkzNyA0MC41NjQ2IDUyLjEzNTlDNDAuNjQ4NiA1Mi4xNzgyIDQwLjY5MDcgNTIuMjIwNSA0MC42OTA3IDUyLjMwNTFWNTMuNDQ2N0g0Mi45NjAxVjUzLjQwNDRaTTE4LjA4MDIgNTEuNTg2M0MxNi4yNzMgNTEuNTg2MyAxNC44MDIxIDUwLjEwNjQgMTQuODAyMSA0OC4yMDM4QzE0LjgwMjEgNDYuMzAxMSAxNi4yMzEgNDQuODIxMyAxOC4wODAyIDQ0LjgyMTNDMTkuODg3MyA0NC44MjEzIDIxLjM1ODMgNDYuMzAxMSAyMS4zNTgzIDQ4LjIwMzhDMjEuMzU4MyA1MC4xMDY0IDE5Ljg4NzMgNTEuNTg2MyAxOC4wODAyIDUxLjU4NjNaTTIzLjUwMTcgNTMuNDA0NFY0Mi45NjA5SDIxLjIzMjJWNDQuMDE3OUMyMS4yMzIyIDQ0LjEwMjUgMjEuMTkwMiA0NC4xODcxIDIxLjEwNjEgNDQuMTg3MUMyMS4wMjIxIDQ0LjIyOTMgMjAuOTM4IDQ0LjE4NzEgMjAuODk2IDQ0LjE0NDhDMjAuMTM5NSA0My4yMTQ2IDE4Ljk2MjcgNDIuNzA3MiAxNy41NzU5IDQyLjcwNzJDMTQuNzE4IDQyLjcwNzIgMTIuNTMyNiA0NS4xMTczIDEyLjUzMjYgNDguMjAzOEMxMi41MzI2IDUxLjI5MDMgMTQuNzYwMSA1My43MDA0IDE3LjU3NTkgNTMuNzAwNEMxOC44Nzg3IDUzLjcwMDQgMjAuMDk3NSA1My4xNTA3IDIwLjg5NiA1Mi4xNzgyQzIwLjkzOCA1Mi4wOTM3IDIxLjAyMjEgNTIuMDkzNyAyMS4xMDYxIDUyLjEzNTlDMjEuMTkwMiA1Mi4xNzgyIDIxLjIzMjIgNTIuMjIwNSAyMS4yMzIyIDUyLjMwNTFWNTMuNDQ2N0gyMy41MDE3VjUzLjQwNDRaTTUuODA4MzMgNTEuNTg2M0MzLjk1OTE0IDUxLjU4NjMgMi41MzAyMyA1MC4xMDY0IDIuNTMwMjMgNDguMjAzOEMyLjUzMDIzIDQ2LjMwMTEgMy45NTkxNCA0NC44MjEzIDUuODA4MzMgNDQuODIxM0M3LjYxNTQ4IDQ0LjgyMTMgOS4wODY0MyA0Ni4zMDExIDkuMDg2NDMgNDguMjAzOEM5LjA4NjQzIDUwLjEwNjQgNy42MTU0OCA1MS41ODYzIDUuODA4MzMgNTEuNTg2M1pNMTEuMjI5OCA1My40MDQ0VjM4LjQzNjhIOC45MTgzMlY0NC4wNjAyQzguOTE4MzIgNDQuMTQ0OCA4Ljg3NjI5IDQ0LjIyOTMgOC43OTIyNCA0NC4yMjkzQzguNzA4MTggNDQuMjcxNiA4LjYyNDEzIDQ0LjIyOTMgOC41ODIxIDQ0LjE4NzFDNy43ODM1OSA0My4yNTY5IDYuNjA2ODQgNDIuNzQ5NSA1LjI2MTk4IDQyLjc0OTVDMi40MDQxNSA0Mi43NDk1IDAuMjE4NzUgNDUuMTU5NSAwLjIxODc1IDQ4LjI0NjFDMC4yMTg3NSA0OS43NjgyIDAuNzIzMDczIDUxLjEyMTIgMS42ODk2OSA1Mi4xNzgyQzIuNjE0MjggNTMuMTkzIDMuOTE3MTIgNTMuNzQyNiA1LjMwNCA1My43NDI2QzYuNjA2ODQgNTMuNzQyNiA3LjgyNTYyIDUzLjE5MyA4LjYyNDEzIDUyLjIyMDVDOC42NjYxNiA1Mi4xNzgyIDguNzUwMjEgNTIuMTM1OSA4LjgzNDI2IDUyLjE3ODJDOC45MTgzMiA1Mi4yMjA1IDguOTYwMzQgNTIuMjYyOCA4Ljk2MDM0IDUyLjM0NzRWNTMuNDQ2N0gxMS4yMjk4VjUzLjQwNDRaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPjxwYXRoIGQ9Ik01OS43Mjc5IDEyLjUxNTNMNDcuMjAzOSAxOS42MTg1TDMzLjg4MTQgMTIuMDUwMkwzMy4yNTEgMTIuMzg4NFYxNy44ODVMNDcuMjAzOSAyNS44MzM5TDU5LjcyNzkgMTguNzMwNlYyMS42NDhMNDcuMjAzOSAyOC43NTEzTDMzLjg4MTQgMjEuMTgyOUwzMy4yNTEgMjEuNTIxMlYyMi40NTE0TDQ3LjIwMzkgMzAuNDAwMkw2MS4xOTg5IDIyLjQ1MTRWMTYuOTU0OEw2MC41Njg1IDE2LjYxNjVMNDcuMjAzOSAyNC4xODQ5TDM0LjcyMTkgMTcuMDgxNlYxNC4yMDY1TDQ3LjIwMzkgMjEuMjY3NUw2MS4xOTg5IDEzLjMxODZWNy45MDY2TDYwLjQ4NDQgNy41MjYwN0w0Ny4yMDM5IDE1LjA1MjFMMzUuMzk0MyA4LjMyOTQxTDQ3LjIwMzkgMS42NDg5N0w1Ni45NTQxIDcuMTQ1NTRMNTcuODM2NyA2LjY4MDQ0VjYuMDAzOTRMNDcuMjAzOSAwTDMzLjI1MSA3LjkwNjZWOC43NTIyM0w0Ny4yMDM5IDE2LjcwMTFMNTkuNzI3OSA5LjU5Nzg1VjEyLjUxNTNaIiBmaWxsPSIjRkYzNjIxIj48L3BhdGg+PC9zdmc+IA==" alt="Databricks"/>
   <h1>Hands-on: Building Agentic AI Solutions</h1>
   <h3>From zero to a multi-agent system over real Calgary data — in 90 minutes</h3>
   <div class="sub">
@@ -69,14 +89,13 @@
       <div class="step"><b>2</b> Region: <strong>United States</strong> (more free compute than Canada)</div>
       <div class="step"><b>3</b> In your workspace: <strong>Workspace → Create → Git folder</strong>, paste ↓</div>
       <div class="bigurl">github.com/vragovvolo/uofc-agents-workshop</div>
-      <p class="small">It's yours to keep after today — free forever, no credit card.</p>
+      <p class="small" style="font-size:0.55em">It's yours to keep after today — free forever, no credit card.</p>
     </div>
     <div style="text-align:center">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://github.com/vragovvolo/uofc-agents-workshop" width="320" alt="repo QR"/>
-      <p class="small">README has every step</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://github.com/vragovvolo/uofc-agents-workshop" width="250" alt="repo QR"/>
+      <p class="small" style="font-size:0.55em">README has every step</p>
     </div>
   </div>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 3. What we're building -->
@@ -97,11 +116,10 @@
     <li>Every layer built by <strong>you</strong>, from scratch — no frameworks, ~60 lines of Python</li>
     <li>On the way: SQL, a no-code agent (Genie), LLM tool-calling, and agent observability</li>
   </ul>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 4. What is an agent -->
-<section>
+<section class="compact">
   <h1>What is an agent, actually?</h1>
   <blockquote><strong>agent</strong> = LLM + tools + a loop</blockquote>
   <pre><code class="language-python">while True:
@@ -115,7 +133,6 @@
     <li>Errors go <em>back into the loop</em> — the agent reads them and fixes itself</li>
     <li>Everything else (multi-agent, RAG, "deep research") is variations on this loop</li>
   </ul>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 5. The data -->
@@ -131,7 +148,6 @@
     <tr><td><code>communities</code></td><td>Community → sector/ward lookup</td><td>312</td><td>the join key that ties it together</td></tr>
   </table>
   <p class="small">All public, all real, all joinable on community. Bundled in the repo — nothing to download.</p>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 6. Agenda -->
@@ -148,7 +164,6 @@
     <tr><td>80–90</td><td>Experiment + show &amp; tell</td><td>notebook <code>04_extensions</code></td></tr>
   </table>
   <div class="callout small">Stuck at any point? Raise a hand — or pair up with a neighbour. Pairing is encouraged all session.</div>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 7. Segment: data -->
@@ -164,11 +179,10 @@
     <li>Click the ✦ <strong>Assistant</strong> icon → ask it to write a query for you:</li>
   </ul>
   <blockquote class="small">"show me crime counts by year for the BELTLINE community as a bar chart"</blockquote>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 8. Segment: Genie -->
-<section>
+<section class="compact">
   <h1>② Genie — an agent you configure with clicks</h1>
   <div class="grid-2">
     <div>
@@ -189,11 +203,10 @@
       <div class="callout small"><strong>Steps:</strong> <code>GENIE_SETUP.md</code> in the repo — 3 minutes.</div>
     </div>
   </div>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 9. Segment: simple agent -->
-<section>
+<section class="compact">
   <h1>③ Your first agent, from scratch</h1>
   <ul>
     <li>Open <code>notebooks/02_simple_agent</code> — run cell by cell, read as you go</li>
@@ -206,11 +219,10 @@
     <li>This is the #1 tool for debugging agents in production</li>
   </ul>
   <blockquote class="small">Try to break it: ask about a table that doesn't exist. Watch the trace as it recovers.</blockquote>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 10. Segment: multi-agent -->
-<section>
+<section class="compact">
   <h1>④+⑤ Specialists and the supervisor</h1>
   <div class="grid-2">
     <div>
@@ -236,7 +248,6 @@
       <div class="callout-good small">This hand-built pattern is exactly what <strong>Agent Bricks Supervisor Agents</strong> productionize on full Databricks.</div>
     </div>
   </div>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 11. Experimentation -->
@@ -250,11 +261,10 @@
     <tr><td>🔴</td><td>LLM-per-row with <code>ai_query</code> in SQL · build an eval set and score your agent</td></tr>
   </table>
   <div class="callout"><strong>At :80 we reconvene</strong> — volunteers show one thing they built or one weird fact they found in the data. Weird facts count.</div>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 <!-- 12. Wrap -->
-<section>
+<section class="compact">
   <h1>Where this goes next</h1>
   <ul>
     <li><strong>You hand-built the loop</strong> — now you'll recognize it inside every agent framework</li>
@@ -266,16 +276,24 @@
     <span class="small">Questions later: volo.vragov@databricks.com</span>
   </blockquote>
   <h3>Thank you — go build agents 🛠️</h3>
-  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
 </section>
 
 </div>
+</div>
+
+<div id="db-footer">
+  <span><img class="db-footer-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSI1NCIgdmlld0JveD0iMCAwIDk2IDU0IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMjYuNTI3NiA0OS45MzczVjQ1LjA3NUMyNi41Mjc2IDQ0Ljk0ODEgMjYuNDQzNSA0NC44NjM2IDI2LjMxNzUgNDQuODYzNkgyNC43MjA0VjQyLjk2MDlIMjYuMzE3NUMyNi40NDM1IDQyLjk2MDkgMjYuNTI3NiA0Mi44NzYzIDI2LjUyNzYgNDIuNzQ5NVYzOS43MDUzSDI4Ljc5N1Y0Mi43NDk1QzI4Ljc5NyA0Mi44NzYzIDI4Ljg4MTEgNDIuOTYwOSAyOS4wMDcyIDQyLjk2MDlIMzEuMjM0NlY0NC44NjM2SDI5LjAwNzJDMjguODgxMSA0NC44NjM2IDI4Ljc5NyA0NC45NDgxIDI4Ljc5NyA0NS4wNzVWNDkuMzg3N0MyOC43OTcgNTEuNDE3MiAyOS41MTE1IDUxLjU4NjMgMzAuNDM2MSA1MS41ODYzQzMwLjc3MjMgNTEuNTg2MyAzMS4yNzY2IDUxLjU0NCAzMS41NzA4IDUxLjUwMTdWNTMuNDg4OUMzMS4xOTI2IDUzLjUzMTIgMzAuNTYyMiA1My42MTU4IDI5Ljg0NzcgNTMuNjE1OEMyOC45NjUxIDUzLjU3MzUgMjYuNTI3NiA1My41NzM1IDI2LjUyNzYgNDkuOTM3M1pNODguMjIzMSA1MS4xMjEyTDkwLjA3MjMgNTAuMTQ4N0M5MC40OTI1IDUxLjEyMTIgOTEuMjkxIDUxLjc1NTQgOTIuMjE1NiA1MS43NTU0QzkyLjkzMDEgNTEuNzU1NCA5My43Mjg2IDUxLjQ1OTQgOTMuNzI4NiA1MC41NzE1QzkzLjcyODYgNDkuOTc5NiA5My4zNTA0IDQ5LjY0MTMgOTIuNDY3OCA0OS4zNDU0TDkxLjIwNyA0OC45MjI2Qzg5LjQ0MTkgNDguMzcyOSA4OC41NTkzIDQ3LjM1ODIgODguNTU5MyA0NS45MjA2Qzg4LjU1OTMgNDQuMTAyNSA5MC4wNzIzIDQyLjc0OTUgOTIuMTMxNiA0Mi43NDk1QzkzLjc3MDYgNDIuNzQ5NSA5NS4xNTc1IDQzLjYzNzQgOTUuODI5OSA0NS4wMzI3TDkzLjk4MDggNDYuMDQ3NEM5My41NjA1IDQ1LjE1OTUgOTIuODg4MSA0NC42NTIyIDkyLjA4OTYgNDQuNjUyMkM5MS4yOTEgNDQuNjUyMiA5MC43NDQ3IDQ1LjA3NSA5MC43NDQ3IDQ1LjcwOTJDOTAuNzQ0NyA0Ni4yNTg4IDkxLjE2NSA0Ni42ODE3IDkyLjAwNTUgNDYuOTM1M0w5My4yNjYzIDQ3LjM1ODJDOTUuMTE1NSA0Ny45NTAxIDk1Ljk5OCA0OC45NjQ4IDk1Ljk5OCA1MC4zNjAxQzk1Ljk5OCA1Mi41NTg4IDk0LjEwNjggNTMuNzAwNCA5Mi4yMTU2IDUzLjcwMDRDOTAuMzI0NCA1My42NTgxIDg4LjgxMTQgNTIuNjg1NiA4OC4yMjMxIDUxLjEyMTJaTTgxLjI0NjYgNDkuMjE4NUM4MS4yMDQ2IDQ5LjI2MDggODEuMTYyNiA0OS4zMDMxIDgxLjE2MjYgNDkuMzQ1NFY1My40MDQ0SDc4Ljg1MTFWMzguMzk0NUg4MS4xNjI2VjQ2LjU5NzFDODEuMTYyNiA0Ni42ODE3IDgxLjIwNDYgNDYuNzY2MiA4MS4yODg2IDQ2Ljc2NjJDODEuMzcyNyA0Ni44MDg1IDgxLjQ1NjcgNDYuNzY2MiA4MS40OTg4IDQ2LjcyMzlMODUuMjM5MiA0Mi45MTg2SDg4LjA1NUw4My42ODQyIDQ3LjM1ODJDODMuNjAwMSA0Ny40NDI3IDgzLjYwMDEgNDcuNTI3MyA4My42ODQyIDQ3LjYxMThMODguNDMzMiA1My40MDQ0SDg1LjYxNzRMODEuOTYxMSA0OC44MzhDODEuOTE5IDQ4Ljc5NTcgODEuODc3IDQ4Ljc1MzQgODEuODM1IDQ4Ljc1MzRDODEuNzkzIDQ4Ljc1MzQgODEuNzUwOSA0OC43NTM0IDgxLjcwODkgNDguNzk1N0w4MS4yNDY2IDQ5LjIxODVaTTc3LjcxNjMgNDQuMzU2Mkw3Ni4yNDU0IDQ1Ljc1MTVDNzUuNDA0OSA0NS4xMTczIDc0LjU2NDMgNDQuODIxMyA3My42Mzk3IDQ0LjgyMTNDNzEuNzA2NSA0NC44MjEzIDcwLjI3NzYgNDYuMjU4OCA3MC4yNzc2IDQ4LjIwMzhDNzAuMjc3NiA1MC4xNDg3IDcxLjcwNjUgNTEuNTg2MyA3My42Mzk3IDUxLjU4NjNDNzQuNDgwMyA1MS41ODYzIDc1LjM2MjggNTEuMjkwMyA3Ni4yODc0IDUwLjY1NjFMNzcuNTkwMyA1Mi4wNTE0Qzc1LjY5OTEgNTMuNDQ2NyA3NC42OTA0IDUzLjcwMDQgNzMuMzg3NiA1My43MDA0QzcxLjgzMjYgNTMuNzAwNCA3MC40NDU3IDUzLjE1MDcgNjkuNDM3IDUyLjEzNTlDNjguNDcwNCA1MS4xNjM1IDY3LjkyNDEgNDkuNzI1OSA2Ny45MjQxIDQ4LjIwMzhDNjcuOTI0MSA0NS4wMzI3IDcwLjIzNTYgNDIuNzA3MiA3My40Mjk2IDQyLjcwNzJDNzQuNDgwMyA0Mi43MDcyIDc2LjAzNTMgNDIuODc2MyA3Ny43MTYzIDQ0LjM1NjJaTTY2Ljg3MzQgMzkuODMyMUM2Ni44NzM0IDQwLjU5MzIgNjYuMjQzIDQxLjIyNzQgNjUuNDg2NSA0MS4yMjc0QzY0LjczIDQxLjIyNzQgNjQuMDk5NiA0MC41OTMyIDY0LjA5OTYgMzkuODMyMUM2NC4wOTk2IDM5LjA3MSA2NC43MyAzOC40MzY4IDY1LjQ4NjUgMzguNDM2OEM2Ni4yNDMgMzguNDM2OCA2Ni44NzM0IDM5LjA3MSA2Ni44NzM0IDM5LjgzMjFaTTY2LjY2MzMgNTMuNDA0NEg2NC4zNTE4VjQyLjk2MDlINjYuNjYzM1Y1My40MDQ0Wk01OS4zMDg2IDQ4LjgzOFY1My40NDY3SDU2Ljk5NzFWNDMuMDAzMkg1OS4yNjY1VjQ0LjI3MTZDNTkuMjY2NSA0NC4zNTYyIDU5LjMwODYgNDQuNDQwOCA1OS4zOTI2IDQ0LjQ4M0M1OS40NzY3IDQ0LjUyNTMgNTkuNTYwNyA0NC40ODMgNTkuNjAyOCA0NC4zOTg1QzYwLjE5MTEgNDMuNDI2IDYxLjI4MzggNDIuNzkxOCA2Mi40NjA2IDQyLjc5MThDNjIuNjI4NyA0Mi43OTE4IDYyLjc1NDggNDIuNzkxOCA2Mi44Mzg4IDQyLjgzNDFWNDUuMjAxOEM2Mi43MTI3IDQ1LjE1OTUgNjIuNTAyNiA0NS4xNTk1IDYyLjI5MjUgNDUuMTU5NUM2MC40NDMzIDQ1LjExNzMgNTkuMzA4NiA0Ni41NTQ4IDU5LjMwODYgNDguODM4Wk00Ni45MTA2IDQ4LjIwMzhDNDYuOTEwNiA0Ni4zMDExIDQ4LjMzOTYgNDQuODIxMyA1MC4xODg3IDQ0LjgyMTNDNTIuMDM3OSA0NC44MjEzIDUzLjQ2NjggNDYuMzAxMSA1My40NjY4IDQ4LjIwMzhDNTMuNDY2OCA1MC4xMDY0IDUyLjAzNzkgNTEuNTg2MyA1MC4xODg3IDUxLjU4NjNDNDguMzM5NiA1MS41ODYzIDQ2LjkxMDYgNTAuMTA2NCA0Ni45MTA2IDQ4LjIwMzhaTTQ3LjEyMDggNTIuMTc4MkM0Ny4xNjI4IDUyLjE3ODIgNDcuMTYyOCA1Mi4xNzgyIDQ3LjIwNDggNTIuMTc4MkM0Ny4yNDY4IDUyLjE3ODIgNDcuMzMwOSA1Mi4yMjA1IDQ3LjM3MjkgNTIuMjYyOEM0OC4xNzE0IDUzLjE5MyA0OS4zNDgyIDUzLjcwMDQgNTAuNjkzMSA1My43MDA0QzUzLjU1MDkgNTMuNzAwNCA1NS43MzYzIDUxLjI5MDMgNTUuNzM2MyA0OC4yMDM4QzU1LjczNjMgNDYuNjgxNyA1NS4yMzIgNDUuMzI4NyA1NC4yNjUzIDQ0LjI3MTZDNTMuMzQwOCA0My4yNTY5IDUyLjAzNzkgNDIuNzA3MiA1MC42NTEgNDIuNzA3MkM0OS4zNDgyIDQyLjcwNzIgNDguMTI5NCA0My4yNTY5IDQ3LjMzMDkgNDQuMjI5M0M0Ny4yODg5IDQ0LjI3MTYgNDcuMjA0OCA0NC4zMTM5IDQ3LjEyMDggNDQuMjcxNkM0Ny4wMzY3IDQ0LjIyOTMgNDYuOTk0NyA0NC4xODcxIDQ2Ljk5NDcgNDQuMTAyNVYzOC40MzY4SDQ0LjY4MzJWNTMuNDQ2N0g0Ni45OTQ3VjUyLjM4OTZDNDYuOTk0NyA1Mi4yNjI4IDQ3LjAzNjcgNTIuMjIwNSA0Ny4xMjA4IDUyLjE3ODJaTTM3LjUzODYgNTEuNTg2M0MzNS43MzE1IDUxLjU4NjMgMzQuMjYwNSA1MC4xMDY0IDM0LjI2MDUgNDguMjAzOEMzNC4yNjA1IDQ2LjMwMTEgMzUuNjg5NSA0NC44MjEzIDM3LjUzODYgNDQuODIxM0MzOS4zODc4IDQ0LjgyMTMgNDAuODE2NyA0Ni4zMDExIDQwLjgxNjcgNDguMjAzOEM0MC44MTY3IDUwLjEwNjQgMzkuMzQ1OCA1MS41ODYzIDM3LjUzODYgNTEuNTg2M1pNNDIuOTYwMSA1My40MDQ0VjQyLjk2MDlINDAuNjkwN1Y0NC4wMTc5QzQwLjY5MDcgNDQuMTAyNSA0MC42NDg2IDQ0LjE4NzEgNDAuNTY0NiA0NC4xODcxQzQwLjQ4MDUgNDQuMjI5MyA0MC4zOTY1IDQ0LjE4NzEgNDAuMzU0NCA0NC4xNDQ4QzM5LjU5OCA0My4yMTQ2IDM4LjQyMTIgNDIuNzA3MiAzNy4wMzQzIDQyLjcwNzJDMzQuMTc2NSA0Mi43MDcyIDMxLjk5MTEgNDUuMTE3MyAzMS45OTExIDQ4LjIwMzhDMzEuOTkxMSA1MS4yOTAzIDM0LjIxODUgNTMuNzAwNCAzNy4wMzQzIDUzLjcwMDRDMzguMzM3MSA1My43MDA0IDM5LjU1NTkgNTMuMTUwNyA0MC4zNTQ0IDUyLjE3ODJDNDAuMzk2NSA1Mi4wOTM3IDQwLjQ4MDUgNTIuMDkzNyA0MC41NjQ2IDUyLjEzNTlDNDAuNjQ4NiA1Mi4xNzgyIDQwLjY5MDcgNTIuMjIwNSA0MC42OTA3IDUyLjMwNTFWNTMuNDQ2N0g0Mi45NjAxVjUzLjQwNDRaTTE4LjA4MDIgNTEuNTg2M0MxNi4yNzMgNTEuNTg2MyAxNC44MDIxIDUwLjEwNjQgMTQuODAyMSA0OC4yMDM4QzE0LjgwMjEgNDYuMzAxMSAxNi4yMzEgNDQuODIxMyAxOC4wODAyIDQ0LjgyMTNDMTkuODg3MyA0NC44MjEzIDIxLjM1ODMgNDYuMzAxMSAyMS4zNTgzIDQ4LjIwMzhDMjEuMzU4MyA1MC4xMDY0IDE5Ljg4NzMgNTEuNTg2MyAxOC4wODAyIDUxLjU4NjNaTTIzLjUwMTcgNTMuNDA0NFY0Mi45NjA5SDIxLjIzMjJWNDQuMDE3OUMyMS4yMzIyIDQ0LjEwMjUgMjEuMTkwMiA0NC4xODcxIDIxLjEwNjEgNDQuMTg3MUMyMS4wMjIxIDQ0LjIyOTMgMjAuOTM4IDQ0LjE4NzEgMjAuODk2IDQ0LjE0NDhDMjAuMTM5NSA0My4yMTQ2IDE4Ljk2MjcgNDIuNzA3MiAxNy41NzU5IDQyLjcwNzJDMTQuNzE4IDQyLjcwNzIgMTIuNTMyNiA0NS4xMTczIDEyLjUzMjYgNDguMjAzOEMxMi41MzI2IDUxLjI5MDMgMTQuNzYwMSA1My43MDA0IDE3LjU3NTkgNTMuNzAwNEMxOC44Nzg3IDUzLjcwMDQgMjAuMDk3NSA1My4xNTA3IDIwLjg5NiA1Mi4xNzgyQzIwLjkzOCA1Mi4wOTM3IDIxLjAyMjEgNTIuMDkzNyAyMS4xMDYxIDUyLjEzNTlDMjEuMTkwMiA1Mi4xNzgyIDIxLjIzMjIgNTIuMjIwNSAyMS4yMzIyIDUyLjMwNTFWNTMuNDQ2N0gyMy41MDE3VjUzLjQwNDRaTTUuODA4MzMgNTEuNTg2M0MzLjk1OTE0IDUxLjU4NjMgMi41MzAyMyA1MC4xMDY0IDIuNTMwMjMgNDguMjAzOEMyLjUzMDIzIDQ2LjMwMTEgMy45NTkxNCA0NC44MjEzIDUuODA4MzMgNDQuODIxM0M3LjYxNTQ4IDQ0LjgyMTMgOS4wODY0MyA0Ni4zMDExIDkuMDg2NDMgNDguMjAzOEM5LjA4NjQzIDUwLjEwNjQgNy42MTU0OCA1MS41ODYzIDUuODA4MzMgNTEuNTg2M1pNMTEuMjI5OCA1My40MDQ0VjM4LjQzNjhIOC45MTgzMlY0NC4wNjAyQzguOTE4MzIgNDQuMTQ0OCA4Ljg3NjI5IDQ0LjIyOTMgOC43OTIyNCA0NC4yMjkzQzguNzA4MTggNDQuMjcxNiA4LjYyNDEzIDQ0LjIyOTMgOC41ODIxIDQ0LjE4NzFDNy43ODM1OSA0My4yNTY5IDYuNjA2ODQgNDIuNzQ5NSA1LjI2MTk4IDQyLjc0OTVDMi40MDQxNSA0Mi43NDk1IDAuMjE4NzUgNDUuMTU5NSAwLjIxODc1IDQ4LjI0NjFDMC4yMTg3NSA0OS43NjgyIDAuNzIzMDczIDUxLjEyMTIgMS42ODk2OSA1Mi4xNzgyQzIuNjE0MjggNTMuMTkzIDMuOTE3MTIgNTMuNzQyNiA1LjMwNCA1My43NDI2QzYuNjA2ODQgNTMuNzQyNiA3LjgyNTYyIDUzLjE5MyA4LjYyNDEzIDUyLjIyMDVDOC42NjYxNiA1Mi4xNzgyIDguNzUwMjEgNTIuMTM1OSA4LjgzNDI2IDUyLjE3ODJDOC45MTgzMiA1Mi4yMjA1IDguOTYwMzQgNTIuMjYyOCA4Ljk2MDM0IDUyLjM0NzRWNTMuNDQ2N0gxMS4yMjk4VjUzLjQwNDRaIiBmaWxsPSIjMUIzMTM5Ij48L3BhdGg+PHBhdGggZD0iTTU5LjcyNzkgMTIuNTE1M0w0Ny4yMDM5IDE5LjYxODVMMzMuODgxNCAxMi4wNTAyTDMzLjI1MSAxMi4zODg0VjE3Ljg4NUw0Ny4yMDM5IDI1LjgzMzlMNTkuNzI3OSAxOC43MzA2VjIxLjY0OEw0Ny4yMDM5IDI4Ljc1MTNMMzMuODgxNCAyMS4xODI5TDMzLjI1MSAyMS41MjEyVjIyLjQ1MTRMNDcuMjAzOSAzMC40MDAyTDYxLjE5ODkgMjIuNDUxNFYxNi45NTQ4TDYwLjU2ODUgMTYuNjE2NUw0Ny4yMDM5IDI0LjE4NDlMMzQuNzIxOSAxNy4wODE2VjE0LjIwNjVMNDcuMjAzOSAyMS4yNjc1TDYxLjE5ODkgMTMuMzE4NlY3LjkwNjZMNjAuNDg0NCA3LjUyNjA3TDQ3LjIwMzkgMTUuMDUyMUwzNS4zOTQzIDguMzI5NDFMNDcuMjAzOSAxLjY0ODk3TDU2Ljk1NDEgNy4xNDU1NEw1Ny44MzY3IDYuNjgwNDRWNi4wMDM5NEw0Ny4yMDM5IDBMMzMuMjUxIDcuOTA2NlY4Ljc1MjIzTDQ3LjIwMzkgMTYuNzAxMUw1OS43Mjc5IDkuNTk3ODVWMTIuNTE1M1oiIGZpbGw9IiNGRjM2MjEiPjwvcGF0aD48L3N2Zz4g" alt="Databricks"/>&nbsp;&nbsp;UofC AI Summer School</span>
+  <span>2026-06-10</span>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
 <script>
   Reveal.initialize({ hash: true, slideNumber: "c/t", plugins: [RevealHighlight] });
+  const footer = document.getElementById("db-footer");
+  const syncFooter = (e) => footer.classList.toggle("hidden", (e ? e.indexh : Reveal.getIndices().h) === 0);
+  Reveal.on("slidechanged", syncFooter);
+  Reveal.on("ready", syncFooter);
 </script>
 </body>
 </html>
