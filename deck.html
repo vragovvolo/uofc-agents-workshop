@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hands-on Building Agentic AI Solutions — UofC AI Summer School</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+
+<style>
+  :root { --db-orange: #FF3621; --db-navy: #1B3139; --db-gray: #f4f4f4; }
+  .reveal { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .reveal h1, .reveal h2, .reveal h3 { color: var(--db-navy); text-transform: none; letter-spacing: -0.02em; font-weight: 600; }
+  .reveal h1 { font-size: 1.8em; }
+  .reveal h2 { font-size: 1.4em; }
+  .reveal h3 { font-size: 1.1em; color: var(--db-orange); }
+  .reveal section { text-align: left; }
+  .reveal section.title-slide { text-align: center; }
+  .reveal table { font-size: 0.55em; margin: 0.4em 0; border-collapse: collapse; width: 100%; }
+  .reveal table th { background: var(--db-navy); color: white; padding: 6px 10px; text-align: left; font-weight: 600; }
+  .reveal table td { padding: 5px 10px; border-bottom: 1px solid #e5e5e5; vertical-align: top; }
+  .reveal table tr:nth-child(even) td { background: var(--db-gray); }
+  .reveal ul, .reveal ol { margin-left: 1em; }
+  .reveal li { margin: 0.25em 0; }
+  .reveal blockquote { border-left: 4px solid var(--db-orange); background: var(--db-gray); padding: 12px 18px; font-style: normal; box-shadow: none; margin: 0.6em 0; }
+  .reveal pre { font-size: 0.55em; box-shadow: none; border-left: 4px solid var(--db-navy); }
+  .reveal code { font-family: "SF Mono", Monaco, Consolas, monospace; }
+  .reveal .footer { position: absolute; bottom: 14px; left: 30px; right: 30px; font-size: 0.4em; color: #888; display: flex; justify-content: space-between; }
+  .reveal strong { color: var(--db-navy); }
+  .reveal em { color: #555; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .callout { background: #fff7ed; border: 1px solid #fdba74; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
+  .callout-good { background: #f0fdf4; border: 1px solid #86efac; padding: 12px 16px; border-radius: 6px; margin: 0.5em 0; }
+  .ascii-arch { font-family: "SF Mono", Monaco, monospace; font-size: 0.7em; background: var(--db-gray); padding: 12px 18px; border-radius: 6px; white-space: pre; line-height: 1.45; }
+  .reveal section.title-slide h1 { font-size: 2.1em; margin-bottom: 0.2em; }
+  .reveal section.title-slide h3 { color: var(--db-navy); font-weight: 400; }
+  .reveal section.title-slide .sub { font-size: 0.7em; color: #666; margin-top: 1em; }
+  .small { font-size: 0.75em; color: #555; }
+  .bigurl { font-family: "SF Mono", Monaco, monospace; font-size: 1.0em; background: var(--db-navy); color: #fff; padding: 10px 22px; border-radius: 8px; display: inline-block; margin: 0.4em 0; }
+  .step { background: var(--db-gray); border-radius: 6px; padding: 10px 16px; margin: 0.35em 0; font-size: 0.8em; }
+  .step b { color: var(--db-orange); margin-right: 8px; }
+</style>
+</head>
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- 1. Title -->
+<section class="title-slide">
+  <h1>Hands-on: Building Agentic AI Solutions</h1>
+  <h3>From zero to a multi-agent system over real Calgary data — in 90 minutes</h3>
+  <div class="sub">
+    <strong>UofC AI Summer School</strong><br/>
+    Volo Vragov &mdash; Specialist Solutions Architect, ML &amp; GenAI, Databricks<br/>
+    June 10, 2026
+  </div>
+</section>
+
+<!-- 2. Setup NOW -->
+<section>
+  <h1>Start this now <span class="small">(while I talk)</span></h1>
+  <div class="grid-2">
+    <div>
+      <div class="step"><b>1</b> Sign up: <strong>databricks.com/learn/free-edition</strong> — Google/Microsoft/school email</div>
+      <div class="step"><b>2</b> Region: <strong>United States</strong> (more free compute than Canada)</div>
+      <div class="step"><b>3</b> In your workspace: <strong>Workspace → Create → Git folder</strong>, paste ↓</div>
+      <div class="bigurl">github.com/vragovvolo/uofc-agents-workshop</div>
+      <p class="small">It's yours to keep after today — free forever, no credit card.</p>
+    </div>
+    <div style="text-align:center">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://github.com/vragovvolo/uofc-agents-workshop" width="320" alt="repo QR"/>
+      <p class="small">README has every step</p>
+    </div>
+  </div>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 3. What we're building -->
+<section>
+  <h1>What you'll build today</h1>
+  <div class="ascii-arch">                        ┌─────────────────────┐
+        you  ──────────▶│   SUPERVISOR agent  │   "Which community has the most
+                        └───┬───────┬───────┬─┘    dogs — and is it also the
+            ┌───────────────┘       │       └────────────┐        complaint capital?"
+            ▼                       ▼                    ▼
+   🐕 pets &amp; people        🚨 city services        🧞 Genie space
+   licensed cats/dogs,     311 complaints,         text-to-SQL agent
+   census population       crime, traffic          you build with clicks
+            └───────────────────────┴─────────────────────┘
+                                    ▼
+                 Delta tables · real data from data.calgary.ca</div>
+  <ul class="small">
+    <li>Every layer built by <strong>you</strong>, from scratch — no frameworks, ~60 lines of Python</li>
+    <li>On the way: SQL, a no-code agent (Genie), LLM tool-calling, and agent observability</li>
+  </ul>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 4. What is an agent -->
+<section>
+  <h1>What is an agent, actually?</h1>
+  <blockquote><strong>agent</strong> = LLM + tools + a loop</blockquote>
+  <pre><code class="language-python">while True:
+    response = llm(messages, tools=[run_sql, ...])   # LLM decides
+    if not response.tool_calls:                      # nothing left to do?
+        return response.content                      # → final answer
+    for call in response.tool_calls:                 # otherwise: act,
+        messages.append(execute(call))               #   observe, repeat</code></pre>
+  <ul>
+    <li>The LLM <em>chooses</em> which tool to call, with what arguments, based on what it has seen so far</li>
+    <li>Errors go <em>back into the loop</em> — the agent reads them and fixes itself</li>
+    <li>Everything else (multi-agent, RAG, "deep research") is variations on this loop</li>
+  </ul>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 5. The data -->
+<section>
+  <h1>Today's data: Calgary, unfiltered</h1>
+  <table>
+    <tr><th>Table</th><th>What it is</th><th>Rows</th><th>Fun fact potential</th></tr>
+    <tr><td><code>c311</code></td><td>311 service requests, last 12 months</td><td>~500K</td><td>what Calgarians complain about, by block</td></tr>
+    <tr><td><code>pets</code></td><td>Licensed cats &amp; dogs by community, monthly</td><td>~43K</td><td>the cats-vs-dogs map of the city</td></tr>
+    <tr><td><code>crime</code></td><td>Crime counts by community, 2018–2024</td><td>~77K</td><td>trends by neighbourhood &amp; category</td></tr>
+    <tr><td><code>traffic</code></td><td>Traffic incidents (near-live)</td><td>~62K</td><td>what's happening on Crowchild right now-ish</td></tr>
+    <tr><td><code>population</code></td><td>Civic census by community</td><td>~10K</td><td>per-capita anything</td></tr>
+    <tr><td><code>communities</code></td><td>Community → sector/ward lookup</td><td>312</td><td>the join key that ties it together</td></tr>
+  </table>
+  <p class="small">All public, all real, all joinable on community. Bundled in the repo — nothing to download.</p>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 6. Agenda -->
+<section>
+  <h1>The next 90 minutes</h1>
+  <table>
+    <tr><th>When</th><th>What</th><th>How</th></tr>
+    <tr><td>0–10</td><td>Setup: free workspace + import repo</td><td>← you're doing it</td></tr>
+    <tr><td>10–22</td><td><strong>Connecting to your data</strong></td><td>notebook <code>01_setup_data</code> — Run all</td></tr>
+    <tr><td>22–35</td><td><strong>A no-code agent: Genie</strong></td><td><code>GENIE_SETUP.md</code> — clicks only</td></tr>
+    <tr><td>35–55</td><td><strong>Build a simple agent</strong></td><td>notebook <code>02_simple_agent</code></td></tr>
+    <tr><td>55–70</td><td><strong>Adding agents</strong></td><td>notebook <code>03_multi_agent</code></td></tr>
+    <tr><td>70–80</td><td><strong>The agentic workflow</strong></td><td>supervisor — same notebook</td></tr>
+    <tr><td>80–90</td><td>Experiment + show &amp; tell</td><td>notebook <code>04_extensions</code></td></tr>
+  </table>
+  <div class="callout small">Stuck at any point? Raise a hand — or pair up with a neighbour. Pairing is encouraged all session.</div>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 7. Segment: data -->
+<section>
+  <h1>① Connecting to your data</h1>
+  <ul>
+    <li>Open <code>notebooks/01_setup_data</code> → <strong>Run all</strong> <span class="small">(serverless compute attaches automatically)</span></li>
+    <li>CSV → <strong>Delta tables</strong> in Unity Catalog: governed, queryable, shareable</li>
+    <li>While it runs: open <strong>Catalog</strong> in the sidebar and explore the schemas</li>
+  </ul>
+  <h3>The vibe-coding moment</h3>
+  <ul>
+    <li>Click the ✦ <strong>Assistant</strong> icon → ask it to write a query for you:</li>
+  </ul>
+  <blockquote class="small">"show me crime counts by year for the BELTLINE community as a bar chart"</blockquote>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 8. Segment: Genie -->
+<section>
+  <h1>② Genie — an agent you configure with clicks</h1>
+  <div class="grid-2">
+    <div>
+      <ul>
+        <li>Genie = Databricks' built-in <strong>text-to-SQL agent</strong></li>
+        <li>Point it at your 6 tables → ask questions in English</li>
+        <li>It writes the SQL, runs it, charts it — and <em>shows its work</em></li>
+      </ul>
+      <h3>Try</h3>
+      <ul class="small">
+        <li>"Which community has the most licensed dogs?"</li>
+        <li>"311 requests per month as a line chart"</li>
+        <li>"Which ward gets the most graffiti complaints?"</li>
+      </ul>
+    </div>
+    <div>
+      <div class="callout-good small"><strong>Why this matters for part ③:</strong> Genie has an API. Anything with an API can become a <em>tool for another agent</em>. Save your Space ID!</div>
+      <div class="callout small"><strong>Steps:</strong> <code>GENIE_SETUP.md</code> in the repo — 3 minutes.</div>
+    </div>
+  </div>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 9. Segment: simple agent -->
+<section>
+  <h1>③ Your first agent, from scratch</h1>
+  <ul>
+    <li>Open <code>notebooks/02_simple_agent</code> — run cell by cell, read as you go</li>
+    <li>One tool: <code>run_sql</code> — note how <strong>errors are returned to the agent</strong>, not raised</li>
+    <li>Databricks-hosted LLMs speak the OpenAI API — the standard <code>openai</code> client just works</li>
+  </ul>
+  <h3>Watch it think</h3>
+  <ul>
+    <li>Every run is traced with <strong>MLflow</strong> — open the trace and see each SQL query it wrote, each error it recovered from</li>
+    <li>This is the #1 tool for debugging agents in production</li>
+  </ul>
+  <blockquote class="small">Try to break it: ask about a table that doesn't exist. Watch the trace as it recovers.</blockquote>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 10. Segment: multi-agent -->
+<section>
+  <h1>④+⑤ Specialists and the supervisor</h1>
+  <div class="grid-2">
+    <div>
+      <h3>Why specialists?</h3>
+      <ul class="small">
+        <li>Focused prompt + small table scope = better SQL, fewer hallucinations</li>
+        <li>Independently testable, swappable, ownable</li>
+        <li>Same reason companies have teams</li>
+      </ul>
+      <h3>Why a supervisor?</h3>
+      <ul class="small">
+        <li>To the supervisor, <strong>each agent is just a tool</strong></li>
+        <li>It routes, asks follow-ups, synthesizes</li>
+        <li>Cross-domain answers no single agent could give</li>
+      </ul>
+    </div>
+    <div>
+      <pre><code class="language-python">SPECIALISTS = {
+  "ask_pets_analyst":     pets_analyst,
+  "ask_services_analyst": services_analyst,
+  "ask_genie":            ask_genie,  # ← your
+}                                     #   Genie!</code></pre>
+      <div class="callout-good small">This hand-built pattern is exactly what <strong>Agent Bricks Supervisor Agents</strong> productionize on full Databricks.</div>
+    </div>
+  </div>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 11. Experimentation -->
+<section>
+  <h1>Experimentation time</h1>
+  <p>Open <code>notebooks/04_extensions</code> and pick your ambition level:</p>
+  <table>
+    <tr><th></th><th>Challenge</th></tr>
+    <tr><td>🟢</td><td>A specialist that only knows <em>your</em> neighbourhood · Assistant-built charts</td></tr>
+    <tr><td>🟡</td><td>Add a <code>traffic_analyst</code> to the supervisor · "City Pulse Report" prompt</td></tr>
+    <tr><td>🔴</td><td>LLM-per-row with <code>ai_query</code> in SQL · build an eval set and score your agent</td></tr>
+  </table>
+  <div class="callout"><strong>At :80 we reconvene</strong> — volunteers show one thing they built or one weird fact they found in the data. Weird facts count.</div>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+<!-- 12. Wrap -->
+<section>
+  <h1>Where this goes next</h1>
+  <ul>
+    <li><strong>You hand-built the loop</strong> — now you'll recognize it inside every agent framework</li>
+    <li>On full Databricks this scales to: <strong>Agent Bricks</strong> (managed Knowledge Assistants + Supervisor Agents), <strong>MLflow evaluation</strong> (LLM judges, regression testing), <strong>Model Serving</strong> + <strong>Apps</strong> (your agent as an endpoint with a chat UI)</li>
+    <li><strong>Your workspace is yours to keep</strong> — free, with everything you built today</li>
+  </ul>
+  <blockquote>
+    Repo stays up: <strong>github.com/vragovvolo/uofc-agents-workshop</strong><br/>
+    <span class="small">Questions later: volo.vragov@databricks.com</span>
+  </blockquote>
+  <h3>Thank you — go build agents 🛠️</h3>
+  <div class="footer"><span>UofC AI Summer School</span><span>2026-06-10</span></div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({ hash: true, slideNumber: "c/t", plugins: [RevealHighlight] });
+</script>
+</body>
+</html>

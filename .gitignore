@@ -1,0 +1,5 @@
+# local-only: raw Socrata pulls and instructor material
+raw/
+RUNBOOK.md
+.DS_Store
+__pycache__/
