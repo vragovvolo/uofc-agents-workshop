@@ -14,7 +14,7 @@ you ──▶ SUPERVISOR agent ──▶ 🐕 pets analyst · 🚨 city services
 
 ## Step 0 — Get your free workspace (do this first!)
 
-1. Go to **<https://login.databricks.com/?intent=signup>** (or search "Databricks Free Edition").
+1. Go to **<https://www.databricks.com/learn/free-edition>** and click **Sign up** (or search "Databricks Free Edition").
 2. Sign in with Google/Microsoft or your school email (an email code logs you in — no password).
 3. Create a new account when prompted.
 4. **Important: select "United States" as your region** (more compute available than Canadian regions).
